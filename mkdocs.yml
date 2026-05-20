@@ -1,0 +1,72 @@
+site_name: automatic-kalman
+site_description: Learn Kalman filter noise covariances Q and R by gradient descent
+site_url: https://username.github.io/automatic-kalman/   # replace "username"
+
+repo_url: https://github.com/username/automatic-kalman   # replace "username"
+repo_name: automatic-kalman
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - API Reference:
+      - Overview: api/overview.md
+      - CholeskyCovariance: api/covariance.md
+      - Filter Protocol: api/filter-protocol.md
+      - KalmanFilter: api/kalman-filter.md
+      - ExtendedKalmanFilter: api/extended-kalman-filter.md
+      - UnscentedKalmanFilter: api/unscented-kalman-filter.md
+      - Losses: api/losses.md
+      - train(): api/train.md
+      - FilterOutputs: api/types.md
+      - Data Generators: api/generators.md
+  - Examples:
+      - Linear KF Tracking: examples/linear-kf-tracking.md
+      - Nonlinear EKF vs UKF: examples/nonlinear-ekf-ukf.md

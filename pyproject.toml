@@ -1,0 +1,70 @@
+[project]
+name = "automatic-kalman"
+version = "0.1.0"
+description = "Learn Kalman filter noise covariances Q and R by gradient descent"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.5",
+    "numpy>=2.0",
+    "scipy>=1.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+    "mypy>=1.10",
+    "matplotlib>=3.9",
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+    "mkdocs-material>=9.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/automatic_kalman"]
+
+# PyTorch CUDA 12.8 wheels (RTX 3060 Ti / driver 591.x)
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+# ---------------------------------------------------------------------------
+# Ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = [
+    "E501",  # line too long — handled by formatter
+]
+
+# ---------------------------------------------------------------------------
+# Mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+warn_return_any = false
+# torch stubs are incomplete; silence the noise
+[[tool.mypy.overrides]]
+module = ["torch.*", "scipy.*"]
+ignore_errors = true
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
